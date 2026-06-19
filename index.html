@@ -1,21 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="style.css">
     <title>Jamovies</title>
     <script src="https://kit.fontawesome.com/5a4e9adce5.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>Connect the movies!</h1>
-    <input type="text" id="movieSearcher" placeholder="Search for a movie...">
-    <button onclick="searchMovie()"><i class="fa-solid fa-magnifying-glass"></i></button>
+    <h1 id="title">Connect the movies!</h1>
 
-    <div id="results"></div>
+    <div id="comparisonContainer">
+        <div id="comparisonOne">
+            <input type="text" id="movieSearcher1" placeholder="Search for a movie...">
+            <button onclick="searchMovie('movieSearcher1','results1')"><i class="fa-solid fa-magnifying-glass"></i></button>
 
+            <div id="results1"></div>
+        </div>
+
+        <div id="comparisonTwo">
+            <input type="text" id="movieSearcher2" placeholder="Search for a movie...">
+            <button onclick="searchMovie('movieSearcher2','results2')"><i class="fa-solid fa-magnifying-glass"></i></button>
+
+            <div id="results2"></div>
+        </div>
+    </div>
     <script src="config.js"></script>
 
     <script>
-        function searchMovie(){
-            const query = document.getElementById("movieSearcher").value
+        function searchMovie(inputID, divID){
+            const query = document.getElementById(inputID).value
             console.log("I want THIS movie:", query)
 
             const options = {
@@ -28,7 +40,7 @@
 
             fetch('https://api.themoviedb.org/3/search/movie?query=' + query, options)
                 .then(res => res.json())
-                .then(res => document.getElementById("results").innerHTML = "<h2>" + res.results[0].title + "</h2>" +
+                .then(res => document.getElementById(divID).innerHTML = "<h2>" + res.results[0].title + "</h2>" +
                 "<img src='https://image.tmdb.org/t/p/w500" + res.results[0].poster_path + "'>" +
                 "<p>" + res.results[0].release_date + "</p>" +
                 "<p>" + res.results[0].overview + "</p>")
