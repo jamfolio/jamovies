@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jamovies</title>
+    <script src="https://kit.fontawesome.com/5a4e9adce5.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>Connect the movies!</h1>
+    <input type="text" id="movieSearcher" placeholder="Search for a movie...">
+    <button onclick="searchMovie()"><i class="fa-solid fa-magnifying-glass"></i></button>
+
+    <div id="results"></div>
+
+    <script src="config.js"></script>
+
+    <script>
+        function searchMovie(){
+            const query = document.getElementById("movieSearcher").value
+            console.log("I want THIS movie:", query)
+
+            const options = {
+                method: 'GET',
+                headers: {
+                    accept: 'application/json',
+                    Authorization: 'Bearer ' + API_TOKEN
+                }         
+            };
+
+            fetch('https://api.themoviedb.org/3/search/movie?query=' + query, options)
+                .then(res => res.json())
+                .then(res => document.getElementById("results").innerHTML = "<h2>" + res.results[0].title + "</h2>" +
+                "<img src='https://image.tmdb.org/t/p/w500" + res.results[0].poster_path + "'>" +
+                "<p>" + res.results[0].release_date + "</p>" +
+                "<p>" + res.results[0].overview + "</p>")
+                .catch(err => console.error(err));
+            }
+
+    </script>
+
+</body>
+</html>
