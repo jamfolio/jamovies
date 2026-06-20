@@ -3,26 +3,69 @@
 <head>
     <link rel="stylesheet" href="style.css">
     <title>Jamovies</title>
+    
     <script src="https://kit.fontawesome.com/5a4e9adce5.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1 id="title">Connect the movies!</h1>
+<h1 id="title">Connect the Movies!</h1>
 
-    <div id="comparisonContainer">
-        <div id="comparisonOne">
-            <input type="text" id="movieSearcher1" placeholder="Search for a movie...">
-            <button onclick="searchMovie('movieSearcher1','results1')"><i class="fa-solid fa-magnifying-glass"></i></button>
+<div id="comparisonContainer">
 
-            <div id="results1"></div>
+    <div class="movieColumn">
+        <div class="searchBar">
+            <input type="text" id="movieSearcherOne" placeholder="Search for a movie...">
+            <button onclick="searchMovie('movieSearcherOne','resultsOne')"><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
-
-        <div id="comparisonTwo">
-            <input type="text" id="movieSearcher2" placeholder="Search for a movie...">
-            <button onclick="searchMovie('movieSearcher2','results2')"><i class="fa-solid fa-magnifying-glass"></i></button>
-
-            <div id="results2"></div>
-        </div>
+        <div id="resultsOne"></div>
     </div>
+
+    <div class="movieColumn">
+        <div class="searchBar">
+            <input type="text" id="movieSearcherTwo" placeholder="Search for a movie...">
+            <button onclick="searchMovie('movieSearcherTwo','resultsTwo')"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+        <div id="resultsTwo"></div>
+    </div>
+
+</div>
+
+<form id="connectionForm">
+    <fieldset>
+        <legend>Step 1: How are they connected?</legend>
+        
+        <div>
+            <input type="checkbox" id="narrative">
+            <label for="narrative">Narrative Structure</label>
+        </div>
+
+        <div>
+            <input type="checkbox" id="theme">
+            <label for="theme">Theme</label>
+        </div>
+
+        <div>
+            <input type="checkbox" id="archetype">
+            <label for="archetype">Character Archetype</label>
+        </div>
+
+        <div>
+            <input type="checkbox" id="other">
+            <label for="other">Other (please specify in your explanation!)</label>
+        </div>
+    
+    </fieldset>
+
+    <fieldset>
+        <legend>Step 2: Explain their connection!</legend>
+
+        <label for="connectionExplanation">How are the two movies connected?</label>
+        <textarea id="connectionExplanation" placeholder="Type here..."></textarea>
+
+    </fieldset>
+
+    <button type="button" id="submitConnection">Submit Connection</button>
+</form>
+
     <script src="config.js"></script>
 
     <script>
@@ -40,10 +83,11 @@
 
             fetch('https://api.themoviedb.org/3/search/movie?query=' + query, options)
                 .then(res => res.json())
-                .then(res => document.getElementById(divID).innerHTML = "<h2>" + res.results[0].title + "</h2>" +
-                "<img src='https://image.tmdb.org/t/p/w500" + res.results[0].poster_path + "'>" +
-                "<p>" + res.results[0].release_date + "</p>" +
-                "<p>" + res.results[0].overview + "</p>")
+                .then(res => { 
+                    let year = res.results[0].release_date.slice(0,4);
+                    document.getElementById(divID).innerHTML = "<h2>" + res.results[0].title + " (" + year + ")" + "</h2>" +
+                    "<img src='https://image.tmdb.org/t/p/w500" + res.results[0].poster_path + "'>"
+                })
                 .catch(err => console.error(err));
             }
 

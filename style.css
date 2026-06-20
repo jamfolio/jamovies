@@ -1,17 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    font-family: 'Monsterrat', sans-serif;
+}
+
 #title {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'Limelight', sans-serif;
 }
 
 #comparisonContainer {
-    display:flex;
+    display: flex;
     justify-content: center;
-    align-items: center;
-    flex:1;
+    align-items: flex-start;
+    gap: 100px;
 }
 
-#movieSearcher1, #movieSearcher2 {
+.movieColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex:1;
+    min-width: 0;
+}
+
+.searchBar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+#movieSearcherOne, #movieSearcherTwo {
     padding: 10px;
     font-size: 16px;
     width: 200px;
@@ -20,4 +45,15 @@
 
 button {
     padding: 10px 15px;
+}
+
+#resultsOne, #resultsTwo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+#resultsOne img, #resultsTwo img {
+    width: 55%;
 }
