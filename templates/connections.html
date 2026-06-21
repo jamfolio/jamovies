@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>View connections - JaMovies</title>
+        <link rel="stylesheet" href="/static/style.css">
+        
+        <script src="https://kit.fontawesome.com/5a4e9adce5.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <h1 id="title">View Connections!</h1>
+
+        <div id="connectionPost">
+            {% for detail in connections %}
+            <div class="post">
+                <p>{{ detail["date"] }}</p>
+
+                <h2>{{ detail["movie_one_title"] }} <i class="fa-solid fa-left-right"></i> {{ detail["movie_two_title"] }} </h2>
+
+                {% if detail["narrative_check"] %}
+                    <span class="tag">Narrative Structure</span>
+                {% endif %}
+
+                {% if detail["theme_check"] %}
+                    <span class="tag">Theme</span>
+                {% endif %}
+
+                {% if detail["archetype_check"] %}
+                    <span class="tag">Character Archetype</span>
+                {% endif %}
+
+                {% if detail["other_check"] %}
+                    <span class="tag">Other</span>
+                {% endif %}
+
+                <img src="https://image.tmdb.org/t/p/w200{{ detail['movie_one_poster'] }}">
+                <img src="https://image.tmdb.org/t/p/w200{{ detail['movie_two_poster'] }}">
+
+                <p>{{ detail["connection_explanation"] }}</p>
+            </div>
+            {% endfor %}
+        </div>
+
+    </body>
+</html>

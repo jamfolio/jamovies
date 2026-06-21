@@ -44,7 +44,7 @@ def connection_submission():
             (movie_one_title, movie_two_title, movie_one_poster, movie_two_poster, narrative_check, theme_check, archetype_check, other_check, connection_explanation)
         )
         db.commit()
-    return render_template('index.html')
+    return render_template('home.html')
 
 @app.route('/search')
 def movies():
@@ -57,6 +57,14 @@ def movies():
         }
     )
     return jsonify(resp.json())
+
+@app.route('/connections')
+def view_connections():
+    db = get_db()
+    connections = db.execute(
+        "SELECT * FROM connections ORDER BY date DESC"
+        ).fetchall()
+    return render_template('connections.html', connections=connections)
 
 @app.teardown_appcontext
 def close_connection(exception):
