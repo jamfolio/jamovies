@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/static/style.css">
     <title>Jamovies</title>
     
     <script src="https://kit.fontawesome.com/5a4e9adce5.js" crossorigin="anonymous"></script>
@@ -14,7 +14,7 @@
     <div class="movieColumn">
         <div class="searchBar">
             <input type="text" id="movieSearcherOne" placeholder="Search for a movie...">
-            <button onclick="searchMovie('movieSearcherOne','resultsOne')"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button onclick="searchMovie('movieSearcherOne','resultsOne','movieOneData')"><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
         <div id="resultsOne"></div>
     </div>
@@ -22,34 +22,37 @@
     <div class="movieColumn">
         <div class="searchBar">
             <input type="text" id="movieSearcherTwo" placeholder="Search for a movie...">
-            <button onclick="searchMovie('movieSearcherTwo','resultsTwo')"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button onclick="searchMovie('movieSearcherTwo','resultsTwo','movieTwoData')"><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
         <div id="resultsTwo"></div>
     </div>
 
 </div>
 
-<form id="connectionForm">
+<form id="connectionForm" method="post">
+    <input type="hidden" name="movie_one" id="movieOneData">
+    <input type="hidden" name="movie_two" id="movieTwoData">
+
     <fieldset>
         <legend>Step 1: How are they connected?</legend>
         
         <div>
-            <input type="checkbox" id="narrative">
+            <input type="checkbox" id="narrative" name="narrative_check">
             <label for="narrative">Narrative Structure</label>
         </div>
 
         <div>
-            <input type="checkbox" id="theme">
+            <input type="checkbox" id="theme" name="theme_check">
             <label for="theme">Theme</label>
         </div>
 
         <div>
-            <input type="checkbox" id="archetype">
+            <input type="checkbox" id="archetype" name="archetype_check">
             <label for="archetype">Character Archetype</label>
         </div>
 
         <div>
-            <input type="checkbox" id="other">
+            <input type="checkbox" id="other" name="other_check">
             <label for="other">Other (please specify in your explanation!)</label>
         </div>
     
@@ -57,19 +60,16 @@
 
     <fieldset>
         <legend>Step 2: Explain their connection!</legend>
-
-        <label for="connectionExplanation">How are the two movies connected?</label>
-        <textarea id="connectionExplanation" placeholder="Type here..."></textarea>
-
+        <textarea name="connection_explanation" id="connectionExplanation" placeholder="Type here..."></textarea>
     </fieldset>
 
-    <button type="button" id="submitConnection">Submit Connection</button>
+    <button type="submit" id="submitConnection">Submit Connection</button>
 </form>
 
-    <script src="config.js"></script>
+    <script src="/static/config.js"></script>
 
     <script>
-        function searchMovie(inputID, divID){
+        function searchMovie(inputID, divID, hiddenID){
             const query = document.getElementById(inputID).value
             console.log("I want THIS movie:", query)
 
@@ -77,16 +77,17 @@
                 method: 'GET',
                 headers: {
                     accept: 'application/json',
-                    Authorization: 'Bearer ' + API_TOKEN
                 }         
             };
 
-            fetch('https://api.themoviedb.org/3/search/movie?query=' + query, options)
+            fetch('/search?query=' + query, options)
                 .then(res => res.json())
                 .then(res => { 
                     let year = res.results[0].release_date.slice(0,4);
                     document.getElementById(divID).innerHTML = "<h2>" + res.results[0].title + " (" + year + ")" + "</h2>" +
-                    "<img src='https://image.tmdb.org/t/p/w500" + res.results[0].poster_path + "'>"
+                    "<img src='https://image.tmdb.org/t/p/w500" + res.results[0].poster_path + "'>";
+
+                    document.getElementById(hiddenID).value = res.results[0].title + " (" + year + ")";
                 })
                 .catch(err => console.error(err));
             }
