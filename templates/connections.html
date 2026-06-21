@@ -16,6 +16,9 @@
 
                 <h2>{{ detail["movie_one_title"] }} <i class="fa-solid fa-left-right"></i> {{ detail["movie_two_title"] }} </h2>
 
+                <img src="https://image.tmdb.org/t/p/w200{{ detail['movie_one_poster'] }}">
+                <img src="https://image.tmdb.org/t/p/w200{{ detail['movie_two_poster'] }}">
+
                 {% if detail["narrative_check"] %}
                     <span class="tag">Narrative Structure</span>
                 {% endif %}
@@ -31,9 +34,6 @@
                 {% if detail["other_check"] %}
                     <span class="tag">Other</span>
                 {% endif %}
-
-                <img src="https://image.tmdb.org/t/p/w200{{ detail['movie_one_poster'] }}">
-                <img src="https://image.tmdb.org/t/p/w200{{ detail['movie_two_poster'] }}">
 
                 <p>{{ detail["connection_explanation"] }}</p>
             </div>

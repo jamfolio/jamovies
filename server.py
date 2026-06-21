@@ -5,6 +5,8 @@ import sqlite3
 import os
 
 app = Flask(__name__)
+app.config['TEMPLATES_AUTO_RELOAD'] = True
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 def init_db():
     db_path = os.path.join(app.instance_path, "jamovies.db")
