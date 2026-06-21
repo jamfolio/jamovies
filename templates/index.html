@@ -14,7 +14,7 @@
     <div class="movieColumn">
         <div class="searchBar">
             <input type="text" id="movieSearcherOne" placeholder="Search for a movie...">
-            <button onclick="searchMovie('movieSearcherOne','resultsOne','movieOneData')"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button onclick="searchMovie('movieSearcherOne','resultsOne','movieOneTitle', 'movieOnePoster')"><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
         <div id="resultsOne"></div>
     </div>
@@ -22,7 +22,7 @@
     <div class="movieColumn">
         <div class="searchBar">
             <input type="text" id="movieSearcherTwo" placeholder="Search for a movie...">
-            <button onclick="searchMovie('movieSearcherTwo','resultsTwo','movieTwoData')"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button onclick="searchMovie('movieSearcherTwo','resultsTwo','movieTwoTitle', 'movieTwoPoster')"><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
         <div id="resultsTwo"></div>
     </div>
@@ -30,8 +30,10 @@
 </div>
 
 <form id="connectionForm" method="post">
-    <input type="hidden" name="movie_one" id="movieOneData">
-    <input type="hidden" name="movie_two" id="movieTwoData">
+    <input type="hidden" name="movie_one_title" id="movieOneTitle">
+    <input type="hidden" name="movie_two_title" id="movieTwoTitle">
+    <input type="hidden" name="movie_one_poster" id="movieOnePoster">
+    <input type="hidden" name="movie_two_poster" id="movieTwoPoster">
 
     <fieldset>
         <legend>Step 1: How are they connected?</legend>
@@ -69,7 +71,7 @@
     <script src="/static/config.js"></script>
 
     <script>
-        function searchMovie(inputID, divID, hiddenID){
+        function searchMovie(inputID, divID, hiddenTitleID, hiddenPosterID){
             const query = document.getElementById(inputID).value
             console.log("I want THIS movie:", query)
 
@@ -87,7 +89,8 @@
                     document.getElementById(divID).innerHTML = "<h2>" + res.results[0].title + " (" + year + ")" + "</h2>" +
                     "<img src='https://image.tmdb.org/t/p/w500" + res.results[0].poster_path + "'>";
 
-                    document.getElementById(hiddenID).value = res.results[0].title + " (" + year + ")";
+                    document.getElementById(hiddenTitleID).value = res.results[0].title + " (" + year + ")";
+                    document.getElementById(hiddenPosterID).value = res.results[0].poster_path;
                 })
                 .catch(err => console.error(err));
             }
