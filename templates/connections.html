@@ -9,15 +9,30 @@
     <body>
         <h1 id="title">View Connections!</h1>
 
+        <div class="extra">
+            <a href="/" class="nav-link">Make a Connection</a>
+        </div>
+
         <div id="connectionPost">
             {% for detail in connections %}
             <div class="post">
-                <p>{{ detail["date"] }}</p>
+                <div class="moviesAndDate">
+                    <div class="movies">
+                        <div class="movieOne">
+                            <h2>{{ detail["movie_one_title"] }} </h2>
+                            <img src="https://image.tmdb.org/t/p/w200{{ detail['movie_one_poster'] }}">
+                        </div>
 
-                <h2>{{ detail["movie_one_title"] }} <i class="fa-solid fa-left-right"></i> {{ detail["movie_two_title"] }} </h2>
+                        <i class="fa-solid fa-left-right"></i>
 
-                <img src="https://image.tmdb.org/t/p/w200{{ detail['movie_one_poster'] }}">
-                <img src="https://image.tmdb.org/t/p/w200{{ detail['movie_two_poster'] }}">
+                        <div class="movieTwo">
+                            <h2>{{ detail["movie_two_title"] }}</h2>
+                            <img src="https://image.tmdb.org/t/p/w200{{ detail['movie_two_poster'] }}">
+                        </div>
+                    </div>
+                    <p class="date">{{ detail["date"] }}</p>
+                </div>
+                
 
                 {% if detail["narrative_check"] %}
                     <span class="tag">Narrative Structure</span>
@@ -34,8 +49,13 @@
                 {% if detail["other_check"] %}
                     <span class="tag">Other</span>
                 {% endif %}
-
-                <p>{{ detail["connection_explanation"] }}</p>
+                
+                <div class="containExplain">
+                    <p>
+                        <b>Reasoning:</b>
+                        {{ detail["connection_explanation"] }}
+                    </p>
+                </div>
             </div>
             {% endfor %}
         </div>

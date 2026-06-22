@@ -19,6 +19,12 @@ body {
     gap: 100px;
 }
 
+.extra {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .movieColumn {
     display: flex;
     flex-direction: column;
@@ -43,8 +49,19 @@ body {
     border-radius: 5px;
 }
 
-button {
+button, .nav-link {
     padding: 10px 15px;
+}
+
+.nav-link {
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+    background-color: ButtonFace;
+    border: 1px solid #888;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-bottom: 5px;
 }
 
 #resultsOne, #resultsTwo {
@@ -56,4 +73,65 @@ button {
 
 #resultsOne img, #resultsTwo img {
     width: 55%;
+}
+
+.post {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.post h2, .post p {
+    margin-top: 4px;
+}
+
+.moviesAndDate {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    margin-top:0px;
+}
+
+.movieOne, .movieTwo {
+    display: inline-block;
+    flex: none;       
+    text-align: left; 
+}
+
+.movieOne {
+    text-align: right;
+}
+
+.movieTwo {
+    text-align: left;
+}
+
+.movies {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;         
+    margin-top: 15px;   
+}
+
+.movies img {
+    width: 200px;       
+    height: 300px;     
+    object-fit: cover;  
+}
+
+.movies i {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.tag {
+    border: solid 1px;
+    border-radius: 5px;
+    background-color: #FCDFA6;
+    padding-left: 5px;
+    padding-right:5px;
 }

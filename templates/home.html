@@ -29,6 +29,10 @@
 
 </div>
 
+<div class="extra">
+    <a href="/connections" class="nav-link">View All Connections</a>
+</div>
+
 <form id="connectionForm" method="post">
     <input type="hidden" name="movie_one_title" id="movieOneTitle">
     <input type="hidden" name="movie_two_title" id="movieTwoTitle">
@@ -79,12 +83,12 @@
                 method: 'GET',
                 headers: {
                     accept: 'application/json',
-                }         
+                }
             };
 
             fetch('/search?query=' + query, options)
                 .then(res => res.json())
-                .then(res => { 
+                .then(res => {
                     let year = res.results[0].release_date.slice(0,4);
                     document.getElementById(divID).innerHTML = "<h2>" + res.results[0].title + " (" + year + ")" + "</h2>" +
                     "<img src='https://image.tmdb.org/t/p/w500" + res.results[0].poster_path + "'>";
