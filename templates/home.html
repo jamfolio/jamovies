@@ -13,18 +13,24 @@
 
     <div class="movieColumn">
         <div class="searchBar">
-            <input type="text" id="movieSearcherOne" placeholder="Search for a movie...">
-            <button onclick="searchMovie('movieSearcherOne','resultsOne','movieOneTitle', 'movieOnePoster')"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <div class="searchInputWrapper">
+                <input type="text" id="movieSearcherOne" placeholder="Search for a movie...">
+                <button onclick="searchMovie('movieSearcherOne','resultsOne','movieOneTitle', 'movieOnePoster', 'selectedOne')"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <div id="resultsOne" class="searchDropdown"></div>
+            </div>
         </div>
-        <div id="resultsOne"></div>
+        <div id="selectedOne"></div>
     </div>
 
     <div class="movieColumn">
         <div class="searchBar">
-            <input type="text" id="movieSearcherTwo" placeholder="Search for a movie...">
-            <button onclick="searchMovie('movieSearcherTwo','resultsTwo','movieTwoTitle', 'movieTwoPoster')"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <div class="searchInputWrapper">
+                <input type="text" id="movieSearcherTwo" placeholder="Search for a movie...">
+                <button onclick="searchMovie('movieSearcherTwo','resultsTwo','movieTwoTitle', 'movieTwoPoster', 'selectedTwo')"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <div id="resultsTwo" class="searchDropdown"></div>
+            </div>
         </div>
-        <div id="resultsTwo"></div>
+        <div id="selectedTwo"></div>
     </div>
 
 </div>
@@ -72,34 +78,7 @@
     <button type="submit" id="submitConnection">Submit Connection</button>
 </form>
 
-    <script src="/static/config.js"></script>
-
-    <script>
-        function searchMovie(inputID, divID, hiddenTitleID, hiddenPosterID){
-            const query = document.getElementById(inputID).value
-            console.log("I want THIS movie:", query)
-
-            const options = {
-                method: 'GET',
-                headers: {
-                    accept: 'application/json',
-                }
-            };
-
-            fetch('/search?query=' + query, options)
-                .then(res => res.json())
-                .then(res => {
-                    let year = res.results[0].release_date.slice(0,4);
-                    document.getElementById(divID).innerHTML = "<h2>" + res.results[0].title + " (" + year + ")" + "</h2>" +
-                    "<img src='https://image.tmdb.org/t/p/w500" + res.results[0].poster_path + "'>";
-
-                    document.getElementById(hiddenTitleID).value = res.results[0].title + " (" + year + ")";
-                    document.getElementById(hiddenPosterID).value = res.results[0].poster_path;
-                })
-                .catch(err => console.error(err));
-            }
-
-    </script>
+<script src="/static/main.js"></script>
 
 </body>
 </html>

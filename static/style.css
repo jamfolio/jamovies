@@ -38,8 +38,39 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
     width: 100%;
+}
+
+.searchInputWrapper {
+    position: relative;
+    display: inline-flex;
+}
+
+.searchDropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border: 1px solid #ccc;
+    width: 100%;
+    z-index: 10;
+    text-align: left;
+}
+
+.searchDropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.searchDropdown li {
+    padding: 8px 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.searchDropdown li:hover {
+    background-color: #f0f0f0;
 }
 
 #movieSearcherOne, #movieSearcherTwo {
@@ -72,6 +103,10 @@ button, .nav-link {
 }
 
 #resultsOne img, #resultsTwo img {
+    width: 55%;
+}
+
+#selectedOne img, #selectedTwo img {
     width: 55%;
 }
 
