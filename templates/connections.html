@@ -16,24 +16,22 @@
         <div id="connectionPost">
             {% for detail in connections %}
             <div class="post">
-                <div class="moviesAndDate">
-                    <div class="movies">
-                        <div class="movieOne">
-                            <h2>{{ detail["movie_one_title"] }} </h2>
-                            <img src="https://image.tmdb.org/t/p/w200{{ detail['movie_one_poster'] }}">
-                        </div>
-
-                        <i class="fa-solid fa-left-right"></i>
-
-                        <div class="movieTwo">
-                            <h2>{{ detail["movie_two_title"] }}</h2>
-                            <img src="https://image.tmdb.org/t/p/w200{{ detail['movie_two_poster'] }}">
-                        </div>
+                <div class="movies">
+                    <div class="movieOne">
+                        <h2>{{ detail["movie_one_title"] }} </h2>
+                        <img src="https://image.tmdb.org/t/p/w200{{ detail['movie_one_poster'] }}">
                     </div>
-                    <p class="date">{{ detail["date"] }}</p>
+
+                    <i class="fa-solid fa-left-right"></i>
+
+                    <div class="movieTwo">
+                        <h2>{{ detail["movie_two_title"] }}</h2>
+                        <img src="https://image.tmdb.org/t/p/w200{{ detail['movie_two_poster'] }}">
+                    </div>
                 </div>
                 
-
+                <p class="date">{{ detail["date"] }}</p>
+                
                 {% if detail["narrative_check"] %}
                     <span class="tag">Narrative Structure</span>
                 {% endif %}

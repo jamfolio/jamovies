@@ -12,7 +12,7 @@ def init_db():
     db_path = os.path.join(app.instance_path, "jamovies.db")
     connection = sqlite3.connect(db_path)
 
-    connection.execute("CREATE TABLE IF NOT EXISTS connections(connection_id INTEGER PRIMARY KEY AUTOINCREMENT, movie_one_title TEXT NOT NULL, movie_two_title TEXT NOT NULL, movie_one_poster TEXT, movie_two_poster TEXT, narrative_check BOOLEAN, theme_check BOOLEAN, archetype_check BOOLEAN, other_check BOOLEAN, connection_explanation TEXT, date TEXT DEFAULT CURRENT_TIMESTAMP)")
+    connection.execute("CREATE TABLE IF NOT EXISTS connections(connection_id INTEGER PRIMARY KEY AUTOINCREMENT, movie_one_title TEXT NOT NULL, movie_two_title TEXT NOT NULL, movie_one_poster TEXT, movie_two_poster TEXT, movie_one_ID INTEGER, movie_two_ID INTEGER, narrative_check BOOLEAN, theme_check BOOLEAN, archetype_check BOOLEAN, other_check BOOLEAN, connection_explanation TEXT, date TEXT DEFAULT CURRENT_TIMESTAMP)")
     connection.commit()
     connection.close()
 
@@ -32,6 +32,8 @@ def connection_submission():
         movie_two_title = request.form.get("movie_two_title")
         movie_one_poster = request.form.get("movie_one_poster")
         movie_two_poster = request.form.get("movie_two_poster")
+        movie_one_ID = request.form.get("movie_one_ID")
+        movie_two_ID = request.form.get("movie_two_ID")
         narrative_check = request.form.get("narrative_check") == ("on")
         theme_check = request.form.get("theme_check") == ("on")
         archetype_check = request.form.get("archetype_check") == ("on")
@@ -41,9 +43,9 @@ def connection_submission():
         db = get_db()
         db.execute(
             "INSERT INTO connections "
-            "(movie_one_title, movie_two_title, movie_one_poster, movie_two_poster, narrative_check, theme_check, archetype_check, other_check, connection_explanation) "
-            "VALUES (?,?,?,?,?,?,?,?,?)",
-            (movie_one_title, movie_two_title, movie_one_poster, movie_two_poster, narrative_check, theme_check, archetype_check, other_check, connection_explanation)
+            "(movie_one_title, movie_two_title, movie_one_poster, movie_two_poster, movie_one_ID, movie_two_ID, narrative_check, theme_check, archetype_check, other_check, connection_explanation) "
+            "VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+            (movie_one_title, movie_two_title, movie_one_poster, movie_two_poster, movie_one_ID, movie_two_ID, narrative_check, theme_check, archetype_check, other_check, connection_explanation)
         )
         db.commit()
     return render_template('home.html')
